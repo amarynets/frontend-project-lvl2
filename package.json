@@ -1,0 +1,29 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "Calculate diff between 2 files",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "gendiff": "bin/gendiff.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amarynets/frontend-project-lvl2.git"
+  },
+  "author": "Andrii Marynets",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amarynets/frontend-project-lvl2/issues"
+  },
+  "homepage": "https://github.com/amarynets/frontend-project-lvl2#readme",
+  "dependencies": {
+    "commander": "^9.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.12.0"
+  }
+}
