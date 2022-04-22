@@ -42,6 +42,7 @@ const buildFlatDiff = (left, right) => {
 };
 
 const formatDiff = (diff, options) => {
+  console.log(options);
   const formattedArray = diff.map((item) => {
     switch (item.action) {
       case 'added':
@@ -75,4 +76,4 @@ const genDiff = (filepath1, filepath2, options) => {
   return diff;
 };
 
-export { genDiff };
+export { genDiff, readFile };
