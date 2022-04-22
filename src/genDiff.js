@@ -56,6 +56,7 @@ const formatDiff = (diff, options) => {
       default:
         break;
     }
+    return 42;
   });
   const formattedStr = [
     '{',
