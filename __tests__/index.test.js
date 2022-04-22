@@ -10,11 +10,19 @@ const __dirname = dirname(__filename);
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
+const expectedFlat = readFile('expected_file.txt');
 
-const firstFilePath = getFixturePath('first.json');
-const secondFilePath = getFixturePath('second.json');
+let firstFilePath = getFixturePath('json/first.json');
+let secondFilePath = getFixturePath('json/second.json');
 
-test('Base test', () => {
-  const expected = readFile('expected_file.txt');
-  expect(genDiff(firstFilePath, secondFilePath, 'plain')).toBe(expected);
+test('Json Flat Test', () => {
+  expect(genDiff(firstFilePath, secondFilePath, 'plain')).toBe(expectedFlat);
 });
+
+firstFilePath = getFixturePath('yaml/first.yml');
+secondFilePath = getFixturePath('yaml/second.yaml');
+
+test('YAML Flat Test', () => {
+  expect(genDiff(firstFilePath, secondFilePath, 'plain')).toBe(expectedFlat);
+});
+

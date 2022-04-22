@@ -1,11 +1,11 @@
+import path from 'path';
 import _ from 'lodash';
 import { readFileSync } from 'fs';
+import parse from '../src/parsers.js'
 
 const readFile = (path) => readFileSync(path);
 
-const jsonParse = (data) => JSON.parse(data);
-
-const parseFileData = (fileData, parser) => parser(fileData);
+const getFileFormat = (filePath) => path.extname(filePath).slice(1);
 
 const buildFlatDiff = (left, right) => {
   const leftKeys = _.keys(left);
@@ -41,8 +41,7 @@ const buildFlatDiff = (left, right) => {
   return diff;
 };
 
-const formatDiff = (diff, options) => {
-  console.log(options);
+const formatDiff = (diff) => {
   const formattedArray = diff.map((item) => {
     switch (item.action) {
       case 'added':
@@ -67,11 +66,10 @@ const formatDiff = (diff, options) => {
 };
 
 const genDiff = (filepath1, filepath2, options) => {
-  console.log(filepath1, filepath2, options);
   const leftFile = readFile(filepath1);
   const rightFile = readFile(filepath2);
-  const left = parseFileData(leftFile, jsonParse);
-  const right = parseFileData(rightFile, jsonParse);
+  const left = parse(leftFile, getFileFormat(filepath1));
+  const right = parse(rightFile, getFileFormat(filepath2));
   const diffRes = buildFlatDiff(left, right);
   const diff = formatDiff(diffRes);
   return diff;
