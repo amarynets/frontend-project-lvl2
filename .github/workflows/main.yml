@@ -1,33 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@amar-pf 
-hexlet-boilerplates
-/
-nodejs-package
-Public template
-Code
-Issues
-Pull requests
-1
-Actions
-Projects
-Wiki
-Security
-Insights
-nodejs-package/.github/workflows/nodejs.yml
-@dzencot
-dzencot fix cache (#47)
-Latest commit ba544eb on 3 Mar
- History
- 8 contributors
-@mokevnin@NikitaNaumenko@corsicanec82@zhabinka@dzencot@alexandertolchinsky@letzabelin@iFoxMan
-48 lines (42 sloc)  1.26 KB
-   
 # Name of workflow
 name: Node CI
 
