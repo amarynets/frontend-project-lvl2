@@ -12,3 +12,6 @@ logs
 .idea/
 .vscode/
 *.sw*
+
+# Ignore coverage
+coverage/

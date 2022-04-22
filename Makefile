@@ -11,4 +11,4 @@ test:
 	npx jest
 
 test-coverage:
-	npx test --coverage --coverageProvider=v8
+	npm test -- --coverage --coverageProvider=v8
