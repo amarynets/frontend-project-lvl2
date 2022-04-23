@@ -2,6 +2,7 @@ import path from 'path';
 import _ from 'lodash';
 import { readFileSync } from 'fs';
 import parse from './parsers.js';
+import format from './formaters/index.js';
 
 const readFile = (filePath) => readFileSync(filePath);
 
@@ -50,64 +51,13 @@ const buildDiff = (left, right) => {
   return diff;
 };
 
-const addIndent = (indent, depth) => ' '.repeat(indent * depth - 2);
-
-const stringify = (value, indent, depth) => {
-  if (!_.isObject(value)) {
-    return value;
-  }
-  const stringifiedValue = [
-    '{',
-    ...Object.entries(value).map(([k, v]) => `${addIndent(indent, depth + 1)}  ${k}: ${stringify(v, indent, depth + 1)}`),
-    `${addIndent(indent, depth)}  }`,
-  ].join('\n');
-  return stringifiedValue;
-};
-
-const buildFormattedArray = (diff, indent, depth) => {
-  const formattedArray = diff.map((item) => {
-    switch (item.action) {
-      case 'added':
-        return `${addIndent(indent, depth)}+ ${item.name}: ${stringify(item.value, indent, depth)}`;
-      case 'not-changed':
-        return `${addIndent(indent, depth)}  ${item.name}: ${stringify(item.value, indent, depth)}`;
-      case 'deleted':
-        return `${addIndent(indent, depth)}- ${item.name}: ${stringify(item.value, indent, depth)}`;
-      case 'changed':
-        return [
-          `${addIndent(indent, depth)}- ${item.name}: ${stringify(item.prev, indent, depth)}`,
-          `${addIndent(indent, depth)}+ ${item.name}: ${stringify(item.current, indent, depth)}`,
-        ].join('\n');
-      case 'nested':
-        return [
-          `${addIndent(indent, depth)}  ${item.name}: {`,
-          ...buildFormattedArray(item.children, indent, depth + 1),
-          `${addIndent(indent, depth)}  }`,
-        ].join('\n');
-      default:
-        throw new Error('Unexpected action');
-    }
-  });
-  return formattedArray;
-};
-
-const formatDiff = (diff, indent = 4, depth = 1) => {
-  const formattedStr = [
-    '{',
-    ...buildFormattedArray(diff, indent, depth),
-    '}',
-  ].join('\n');
-  return formattedStr;
-};
-
-const genDiff = (filepath1, filepath2, options) => {
-  console.log(options);
+const genDiff = (filepath1, filepath2, formater) => {
   const leftFile = readFile(filepath1);
   const rightFile = readFile(filepath2);
   const left = parse(leftFile, getFileFormat(filepath1));
   const right = parse(rightFile, getFileFormat(filepath2));
   const diffRes = buildDiff(left, right);
-  const diff = formatDiff(diffRes);
+  const diff = format(diffRes, formater);
   return diff;
 };
 

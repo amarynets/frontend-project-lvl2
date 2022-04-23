@@ -19,11 +19,11 @@ beforeEach(() => {
 test('Json Flat Test', () => {
   const firstFilePath = getFixturePath('json/first.json');
   const secondFilePath = getFixturePath('json/second.json');
-  expect(genDiff(firstFilePath, secondFilePath, 'plain')).toBe(expectedFlat);
+  expect(genDiff(firstFilePath, secondFilePath, 'stylish')).toBe(expectedFlat);
 });
 
 test('YAML Flat Test', () => {
   const firstFilePath = getFixturePath('yaml/first.yml');
   const secondFilePath = getFixturePath('yaml/second.yaml');
-  expect(genDiff(firstFilePath, secondFilePath, 'plain')).toBe(expectedFlat);
+  expect(genDiff(firstFilePath, secondFilePath, 'stylish')).toBe(expectedFlat);
 });
