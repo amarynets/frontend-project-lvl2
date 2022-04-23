@@ -12,3 +12,6 @@ test:
 
 test-coverage:
 	npm test -- --coverage --coverageProvider=v8
+
+clean:
+	npx jest --clearCache
