@@ -11,3 +11,6 @@ JSON
 YAML
 [![asciicast](https://asciinema.org/a/bE5ynrt4U0Lx6Zmw3FNqNmB3Y.svg)](https://asciinema.org/a/bE5ynrt4U0Lx6Zmw3FNqNmB3Y)
 
+### Nested diff
+[![asciicast](https://asciinema.org/a/NewzGYYG4qYePMqQ9XJqXD115.svg)](https://asciinema.org/a/NewzGYYG4qYePMqQ9XJqXD115)
+
