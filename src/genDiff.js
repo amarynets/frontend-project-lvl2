@@ -51,7 +51,7 @@ const buildDiff = (left, right) => {
   return diff;
 };
 
-const genDiff = (filepath1, filepath2, formater) => {
+const genDiff = (filepath1, filepath2, formater = 'stylish') => {
   const leftFile = readFile(filepath1);
   const rightFile = readFile(filepath2);
   const left = parse(leftFile, getFileFormat(filepath1));
