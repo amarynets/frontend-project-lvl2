@@ -61,4 +61,4 @@ const genDiff = (filepath1, filepath2, formater) => {
   return diff;
 };
 
-export { genDiff, readFile };
+export default genDiff;
