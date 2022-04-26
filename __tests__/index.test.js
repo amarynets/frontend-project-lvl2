@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
-import { test, expect } from '@jest/globals';
+import { test, expect, describe } from '@jest/globals';
 
 import genDiff from '../src/genDiff.js';
 
@@ -11,30 +11,18 @@ const __dirname = dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-test('Test JSON nested', () => {
-  const firstFilePath = getFixturePath('json/first.json');
-  const secondFilePath = getFixturePath('json/second.json');
-  const expectedFlat = readFile('expected_file_stylish.txt');
-  expect(genDiff(firstFilePath, secondFilePath, 'stylish')).toBe(expectedFlat);
-});
+const testTable = [
+  ['json/first.json', 'json/second.json', 'stylish', 'expected_file_stylish.txt'],
+  ['yaml/first.yml', 'yaml/second.yaml', 'stylish', 'expected_file_stylish.txt'],
+  ['json/first.json', 'json/second.json', 'plain', 'expected_file_plain.txt'],
+  ['json/first.json', 'json/second.json', 'json', 'expected_file_json.txt'],
+];
 
-test('Test YAML nested', () => {
-  const expectedFlat = readFile('expected_file_stylish.txt');
-  const firstFilePath = getFixturePath('yaml/first.yml');
-  const secondFilePath = getFixturePath('yaml/second.yaml');
-  expect(genDiff(firstFilePath, secondFilePath, 'stylish')).toBe(expectedFlat);
-});
-
-test('Test PLAIN formatter', () => {
-  const expectedFlat = readFile('expected_file_plain.txt');
-  const firstFilePath = getFixturePath('json/first.json');
-  const secondFilePath = getFixturePath('json/second.json');
-  expect(genDiff(firstFilePath, secondFilePath, 'plain')).toBe(expectedFlat);
-});
-
-test('Test JSON formatter', () => {
-  const expectedFlat = readFile('expected_file_json.txt');
-  const firstFilePath = getFixturePath('json/first.json');
-  const secondFilePath = getFixturePath('json/second.json');
-  expect(genDiff(firstFilePath, secondFilePath, 'json')).toBe(expectedFlat);
+describe.each(testTable)('Test diff', (first, second, formatter, expectedResultFile) => {
+  test('Formatter result comparising', () => {
+    const firstFilePath = getFixturePath(first);
+    const secondFilePath = getFixturePath(second);
+    const expected = readFile(expectedResultFile);
+    expect(genDiff(firstFilePath, secondFilePath, formatter)).toBe(expected);
+  });
 });
