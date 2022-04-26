@@ -1,5 +1,6 @@
 import stylish from './stylish.js';
+import plain from './plain.js';
 
-const formatters = { stylish };
+const formatters = { stylish, plain };
 
-export default (diff, format) => formatters[format](diff);
+export default (diff, formater) => formatters[formater](diff);

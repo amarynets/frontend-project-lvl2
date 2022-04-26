@@ -14,3 +14,6 @@ YAML
 ### Nested diff
 [![asciicast](https://asciinema.org/a/NewzGYYG4qYePMqQ9XJqXD115.svg)](https://asciinema.org/a/NewzGYYG4qYePMqQ9XJqXD115)
 
+### Plain formatter
+[![asciicast](https://asciinema.org/a/HSJtZYV2rcTreWVwptrtHkuJF.svg)](https://asciinema.org/a/HSJtZYV2rcTreWVwptrtHkuJF)
+
