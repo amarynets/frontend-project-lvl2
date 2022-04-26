@@ -31,3 +31,10 @@ test('Test PLAIN formatter', () => {
   const secondFilePath = getFixturePath('json/second.json');
   expect(genDiff(firstFilePath, secondFilePath, 'plain')).toBe(expectedFlat);
 });
+
+test('Test JSON formatter', () => {
+  const expectedFlat = readFile('expected_file_json.txt');
+  const firstFilePath = getFixturePath('json/first.json');
+  const secondFilePath = getFixturePath('json/second.json');
+  expect(genDiff(firstFilePath, secondFilePath, 'json')).toBe(expectedFlat);
+});
