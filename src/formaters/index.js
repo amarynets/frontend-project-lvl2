@@ -4,4 +4,7 @@ import json from './json.js';
 
 const formatters = { stylish, plain, json };
 
-export default (diff, formater) => formatters[formater](diff);
+export default (diff, formater) => {
+  console.log(`AAA${formater}`);
+  return formatters[formater](diff);
+};
