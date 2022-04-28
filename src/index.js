@@ -14,6 +14,7 @@ export default (filepath1, filepath2, formater = 'stylish') => {
   console.log(filepath1, filepath2, formater);
   const left = parse(leftFile, getFileFormat(filepath1));
   const right = parse(rightFile, getFileFormat(filepath2));
+  console.log(left, right);
   const diffRes = genDiff(left, right);
   const diff = format(diffRes, formater);
   return diff;
