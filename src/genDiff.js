@@ -1,14 +1,6 @@
-import path from 'path';
 import _ from 'lodash';
-import { readFileSync } from 'fs';
-import parse from './parsers.js';
-import format from './formaters/index.js';
 
-const readFile = (filePath) => readFileSync(filePath);
-
-const getFileFormat = (filePath) => path.extname(filePath).slice(1);
-
-const buildDiff = (left, right) => {
+const genDiff = (left, right) => {
   const leftKeys = _.keys(left);
   const rightKeys = _.keys(right);
   const keys = _.sortBy(_.union(leftKeys, rightKeys));
@@ -30,7 +22,7 @@ const buildDiff = (left, right) => {
     if (_.isObject(left[key]) && _.isObject(right[key])) {
       return {
         name: key,
-        children: buildDiff(left[key], right[key]),
+        children: genDiff(left[key], right[key]),
         action: 'nested',
       };
     }
@@ -48,16 +40,6 @@ const buildDiff = (left, right) => {
       action: 'changed',
     };
   });
-  return diff;
-};
-
-const genDiff = (filepath1, filepath2, formater = 'stylish') => {
-  const leftFile = readFile(filepath1);
-  const rightFile = readFile(filepath2);
-  const left = parse(leftFile, getFileFormat(filepath1));
-  const right = parse(rightFile, getFileFormat(filepath2));
-  const diffRes = buildDiff(left, right);
-  const diff = format(diffRes, formater);
   return diff;
 };
 
