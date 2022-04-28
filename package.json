@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "Calculate diff between 2 files",
-  "main": "src/genDiff.js",
+  "main": "src/index.js",
   "type": "module",
   "bin": {
     "gendiff": "bin/genDiff.js"
